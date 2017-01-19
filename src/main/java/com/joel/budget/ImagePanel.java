@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  */
 
-public class ImagePanel extends JPanel{
+public class ImagePanel extends JPanel {
 
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class ImagePanel extends JPanel{
 	private BufferedImage image;
 
 	public ImagePanel() {
-		try {                
+		try {
 			image = ImageIO.read(new File("src\\main\\resources\\1000-f.jpg"));
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -34,7 +34,8 @@ public class ImagePanel extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(image, 0, 0, 100, 50, this);
+		g.drawImage(image, 0, 0, 100, 50, this); // see javadoc for more info on the
+										// parameters
 	}
 
 }

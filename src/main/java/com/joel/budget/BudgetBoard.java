@@ -3,6 +3,8 @@
  */
 package com.joel.budget;
 
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 /**
@@ -19,13 +21,17 @@ public class BudgetBoard {
 		// Create and set up the window.
 		JFrame frame = new JFrame("BudgetBoard");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(600, 400);
 
 		// Add the ubiquitous "Hello World" label.
 		JLabel label = new JLabel("Hello World");
-		frame.getContentPane().add(label);
+		frame.getContentPane().add(label, BorderLayout.NORTH);
+
+		ImagePanel ip = new ImagePanel();
+		frame.getContentPane().add(ip, BorderLayout.CENTER);
 
 		// Display the window.
-		frame.pack();
+		// frame.pack();
 		frame.setVisible(true);
 	}
 
