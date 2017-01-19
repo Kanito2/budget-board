@@ -22,8 +22,10 @@ public class ImagePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -2417945731616876267L;
 	private BufferedImage image;
+	private int[] data;
 
-	public ImagePanel() {
+	public ImagePanel(int[] data) {
+		this.data = data;
 		try {
 			image = ImageIO.read(new File("src\\main\\resources\\1000-f.jpg"));
 		} catch (IOException ex) {
@@ -34,8 +36,16 @@ public class ImagePanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(image, 0, 0, 100, 50, this); // see javadoc for more info on the
-										// parameters
+		int x = 0, y = 0;
+
+		for (int elem : data) {
+			y = 0;
+			for (int i = 0; i < elem; i++) {
+				g.drawImage(image, x, y, 100, 50, this);
+				y += 50;
+			}
+			x += 100;
+		}
 	}
 
 }

@@ -27,7 +27,8 @@ public class BudgetBoard {
 		JLabel label = new JLabel("Hello World");
 		frame.getContentPane().add(label, BorderLayout.NORTH);
 
-		ImagePanel ip = new ImagePanel();
+		int[] data = { 8, 2, 1, 0, 4, 9 };
+		ImagePanel ip = new ImagePanel(data);
 		frame.getContentPane().add(ip, BorderLayout.CENTER);
 
 		// Display the window.
