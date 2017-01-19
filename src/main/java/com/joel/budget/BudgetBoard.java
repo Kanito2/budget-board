@@ -13,6 +13,8 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -39,9 +41,9 @@ public class BudgetBoard {
 		JLabel label = new JLabel("Hello World");
 		frame.getContentPane().add(label, BorderLayout.NORTH);
 
-//		int[] data = { 8, 2, 1, 0, 4, 9 };
-//		ImagePanel ip = new ImagePanel(data);
-//		frame.getContentPane().add(ip, BorderLayout.CENTER);
+		// int[] data = { 8, 2, 1, 0, 4, 9 };
+		// ImagePanel ip = new ImagePanel(data);
+		// frame.getContentPane().add(ip, BorderLayout.CENTER);
 
 		jt = new JTextArea();
 		frame.add(jt, BorderLayout.CENTER);
@@ -74,13 +76,17 @@ public class BudgetBoard {
 					e.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
 
 					// Get the files that are dropped as java.util.List
-					java.util.List list = (java.util.List) e.getTransferable()
+					List<File> list = new ArrayList<File>();
+					list = (List<File>) e.getTransferable()
 							.getTransferData(DataFlavor.javaFileListFlavor);
 
 					// Now get the first file from the list,
-					File file = (File) list.get(0);
-					System.out.println(file.getAbsolutePath());
-//					jt.read(new FileReader(file), null);
+//					File file = (File) list.get(0);
+					for (File file : list) {
+						System.out.println(file.getAbsolutePath());
+					}
+					
+					// jt.read(new FileReader(file), null);
 
 				} catch (Exception ex) {
 				}
