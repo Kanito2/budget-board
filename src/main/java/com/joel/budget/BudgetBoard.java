@@ -4,6 +4,7 @@
 package com.joel.budget;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -37,11 +38,14 @@ public class BudgetBoard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 400);
 
-		// Add the ubiquitous "Hello World" label.
+		JPanel jp = new JPanel(new GridLayout(0, 6));
 		JLabel label = new JLabel("Hello World");
-		frame.getContentPane().add(label, BorderLayout.NORTH);
+		JLabel label2 = new JLabel("Hello World");
+		jp.add(label);
+		jp.add(label2);
+		frame.getContentPane().add(jp, BorderLayout.NORTH);
 
-		int[] data = { 8, 2, 1, 0, 4, 9 };
+		int[] data = { 6, 2, 1, 0, 4, 5 };
 		ImagePanel ip = new ImagePanel(data);
 		frame.getContentPane().add(ip, BorderLayout.CENTER);
 
@@ -76,7 +80,7 @@ public class BudgetBoard {
 					list = (List<File>) e.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
 
 					for (File file : list) {
-						System.out.println(file.getAbsolutePath());
+						System.out.println("file dropped: " + file.getAbsolutePath());
 					}
 
 				} catch (Exception ex) {
