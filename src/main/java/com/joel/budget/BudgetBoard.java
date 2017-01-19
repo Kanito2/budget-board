@@ -32,7 +32,7 @@ public class BudgetBoard {
 
 	private static JFrame frame;
 
-	private static void createAndShowGUI() {
+	private static void createAndShowGUI(int[] data) {
 		// Create and set up the window.
 		frame = new JFrame("BudgetBoard");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +45,6 @@ public class BudgetBoard {
 		jp.add(label2);
 		frame.getContentPane().add(jp, BorderLayout.NORTH);
 
-		int[] data = { 6, 2, 1, 0, 4, 5 };
 		ImagePanel ip = new ImagePanel(data);
 		frame.getContentPane().add(ip, BorderLayout.CENTER);
 
@@ -76,11 +75,19 @@ public class BudgetBoard {
 					// Accept the drop first, important!
 					e.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
 
-					List<File> fileList = (List<File>) e.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+					List<File> fileList = (List<File>) e.getTransferable()
+							.getTransferData(DataFlavor.javaFileListFlavor);
 
-					for (File file : fileList) {
-						System.out.println("file dropped: " + file.getAbsolutePath());
-					}
+					// for (File file : fileList) {
+					// System.out.println("file dropped: " +
+					// file.getAbsolutePath());
+					// }
+
+					NordeaParser np = new NordeaParser(fileList);
+					int[] data = { (int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()),
+							(int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()) };
+					frame.dispose();
+					createAndShowGUI(data);
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -94,7 +101,8 @@ public class BudgetBoard {
 		// creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createAndShowGUI();
+				int[] data = { 6, 2, 1, 0, 4, 5 };
+				createAndShowGUI(data);
 			}
 		});
 	}
