@@ -75,20 +75,15 @@ public class BudgetBoard {
 					// Accept the drop first, important!
 					e.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
 
-					// Get the files that are dropped as java.util.List
 					List<File> list = new ArrayList<File>();
-					list = (List<File>) e.getTransferable()
-							.getTransferData(DataFlavor.javaFileListFlavor);
+					list = (List<File>) e.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
 
-					// Now get the first file from the list,
-//					File file = (File) list.get(0);
 					for (File file : list) {
 						System.out.println(file.getAbsolutePath());
 					}
-					
-					// jt.read(new FileReader(file), null);
 
 				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 			}
 		});
