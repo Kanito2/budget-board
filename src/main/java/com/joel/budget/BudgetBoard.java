@@ -29,11 +29,11 @@ public class BudgetBoard {
 	 * invoked from the event-dispatching thread.
 	 */
 
-	private static JTextArea jt;
+	private static JFrame frame;
 
 	private static void createAndShowGUI() {
 		// Create and set up the window.
-		JFrame frame = new JFrame("BudgetBoard");
+		frame = new JFrame("BudgetBoard");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 400);
 
@@ -41,12 +41,9 @@ public class BudgetBoard {
 		JLabel label = new JLabel("Hello World");
 		frame.getContentPane().add(label, BorderLayout.NORTH);
 
-		// int[] data = { 8, 2, 1, 0, 4, 9 };
-		// ImagePanel ip = new ImagePanel(data);
-		// frame.getContentPane().add(ip, BorderLayout.CENTER);
-
-		jt = new JTextArea();
-		frame.add(jt, BorderLayout.CENTER);
+		int[] data = { 8, 2, 1, 0, 4, 9 };
+		ImagePanel ip = new ImagePanel(data);
+		frame.getContentPane().add(ip, BorderLayout.CENTER);
 
 		enableDragAndDrop();
 
@@ -56,7 +53,7 @@ public class BudgetBoard {
 	}
 
 	private static void enableDragAndDrop() {
-		DropTarget target = new DropTarget(jt, new DropTargetListener() {
+		DropTarget target = new DropTarget(frame, new DropTargetListener() {
 			public void dragEnter(DropTargetDragEvent e) {
 			}
 
