@@ -13,8 +13,6 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -83,7 +81,7 @@ public class BudgetBoard {
 					// file.getAbsolutePath());
 					// }
 
-					NordeaParser np = new NordeaParser(fileList);
+					new NordeaParser(fileList);
 					int[] data = { (int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()),
 							(int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()) };
 					frame.dispose();

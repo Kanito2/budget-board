@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class NordeaParser {
 		fileList.add(file);
 		fileList.add(file2);
 
-		NordeaParser np = new NordeaParser(fileList);
+		new NordeaParser(fileList);
 
 		Entry.printTotalSum();
 
