@@ -54,7 +54,7 @@ public class NordeaParser {
 
 		new NordeaParser(fileList);
 
-		Entry.printTotalSum();
+		Entry.printTotalSums();
 
 	}
 

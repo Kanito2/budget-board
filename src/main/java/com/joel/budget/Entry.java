@@ -26,7 +26,7 @@ public class Entry {
 	private String transaction;
 	private String category;
 	private float amount;
-	public static float[] totalSum = new float[7];
+	public static float[] totalSums = new float[7];
 
 	public Entry(String date, String transaction, String amount) {
 		setDate(date, transaction);
@@ -58,7 +58,7 @@ public class Entry {
 				while ((line = br.readLine()) != null) {
 					if (transaction.contains(line)) {
 						this.category = files[i];
-						totalSum[i] += amount;
+						totalSums[i] += amount;
 						break;
 					}
 				}
@@ -72,9 +72,9 @@ public class Entry {
 		}
 	}
 
-	public static void printTotalSum() {
-		for (int i = 0; i < totalSum.length; i++) {
-			System.out.format("%.0f ", totalSum[i]);
+	public static void printTotalSums() {
+		for (int i = 0; i < totalSums.length; i++) {
+			System.out.format("%.0f ", totalSums[i]);
 		}
 		System.out.println();
 	}
