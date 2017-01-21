@@ -3,6 +3,11 @@
  */
 package com.joel.budget;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +28,32 @@ public class Entry {
 	private float amount;
 
 	public Entry(String date, String transaction, String amount) {
+		setDate(date, transaction);
+		this.transaction = transaction;
+		setCategory(transaction);
+		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
+	}
 
+	private void setCategory(String transaction) {
+		File file = new File("/home/joel/workspace_bkp2/NordeaParser/categories/food.txt");
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				// System.out.println(line);
+				if (transaction.contains(line)) {
+					this.category = "food";
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void setDate(String date, String transaction) {
 		Pattern pat = Pattern.compile("Kortköp ([0-9]{6}) (.*)");
 		Matcher matcher = pat.matcher(transaction);
 		DateFormat format;
@@ -43,22 +73,10 @@ public class Entry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		this.transaction = transaction;
-
-		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
-
 	}
 
 	public void print() {
-		System.out.format("%s, %s, %.2f\n", this.date, this.transaction, this.amount);
+		System.out.format("%s: %s, %s, %.2f\n", category, date, transaction, amount);
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
 }
