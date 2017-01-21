@@ -26,12 +26,13 @@ public class Entry {
 	private String transaction;
 	private String category;
 	private float amount;
+	public static float[] totalSum = new float[7];
 
 	public Entry(String date, String transaction, String amount) {
 		setDate(date, transaction);
 		this.transaction = transaction;
-		setCategory(transaction);
 		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
+		setCategory(transaction);
 	}
 
 	private void setCategory(String transaction) {
@@ -55,9 +56,10 @@ public class Entry {
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 				String line;
 				while ((line = br.readLine()) != null) {
-					// System.out.println(line);
 					if (transaction.contains(line)) {
 						this.category = files[i];
+						totalSum[i] += amount;
+						break;
 					}
 				}
 			} catch (FileNotFoundException e) {
@@ -68,6 +70,13 @@ public class Entry {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static void printTotalSum() {
+		for (int i = 0; i < totalSum.length; i++) {
+			System.out.format("%.0f ", totalSum[i]);
+		}
+		System.out.println();
 	}
 
 	private void setDate(String date, String transaction) {
@@ -93,7 +102,8 @@ public class Entry {
 	}
 
 	public void print() {
-		System.out.format("%s: %s, %s, %.2f\n", category, date, transaction, amount);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.format("%s: %s, %s, %.0f\n", category, dateFormat.format(date), transaction, amount);
 	}
 
 }
