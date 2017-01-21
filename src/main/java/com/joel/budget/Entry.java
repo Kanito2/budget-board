@@ -48,7 +48,17 @@ public class Entry {
 
 		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
 
-		System.out.format("%s, %s, %.2f\n", this.date, this.transaction, this.amount);
+	}
 
+	public void print() {
+		System.out.format("%s, %s, %.2f\n", this.date, this.transaction, this.amount);
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

@@ -34,6 +34,7 @@ public class NordeaParser {
 			for (String[] row : myEntries) {
 				if (!row[0].equals("Datum") && !row[0].equals("")) {
 					Entry entry = new Entry(row[0], row[1], row[3]);
+					entry.print();
 				}
 			}
 		}
