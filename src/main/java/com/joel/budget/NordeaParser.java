@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class NordeaParser {
 
 	public NordeaParser(List<File> fileList) {
 		for (File file : fileList) {
-			System.out.println(file.getAbsolutePath());
+			// System.out.println(file.getAbsolutePath());
 
 			CSVReader reader = null;
 			try {
@@ -32,8 +33,8 @@ public class NordeaParser {
 
 			for (String[] row : myEntries) {
 				try {
-					System.out.println(row[1]);
-				} catch (ArrayIndexOutOfBoundsException ex) {
+					Entry entry = new Entry(row[0], row[1], row[3]);
+				} catch (ArrayIndexOutOfBoundsException | ParseException ex) {
 					// ex.printStackTrace();
 				}
 			}
@@ -44,8 +45,12 @@ public class NordeaParser {
 		// TODO Auto-generated method stub
 
 		List<File> fileList = new ArrayList<File>();
-		File file = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export (1).csv");
-		File file2 = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export (2).csv");
+		// File file = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export
+		// (1).csv");
+		// File file2 = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export
+		// (2).csv");
+		File file = new File("/home/joel/workspace_bkp2/NordeaParser/exports/export (1).csv");
+		File file2 = new File("/home/joel/workspace_bkp2/NordeaParser/exports/export (2).csv");
 		fileList.add(file);
 		fileList.add(file2);
 
