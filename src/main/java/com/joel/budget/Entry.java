@@ -35,21 +35,38 @@ public class Entry {
 	}
 
 	private void setCategory(String transaction) {
-		File file = new File("/home/joel/workspace_bkp2/NordeaParser/categories/food.txt");
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				// System.out.println(line);
-				if (transaction.contains(line)) {
-					this.category = "food";
+		String[] files = { "home", "food", "transport", "cloth", "saving", "other", "loan" };
+
+		for (int i = 0; i < files.length; i++) {
+			File file = new File("/home/joel/workspace_bkp2/NordeaParser/categories/" + files[i] + ".txt");
+
+			if (file.exists() && !file.isDirectory()) {
+				// do something
+			} else {
+				try {
+					file.createNewFile();
+					System.out.println("File created: " + file.getAbsolutePath());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+				String line;
+				while ((line = br.readLine()) != null) {
+					// System.out.println(line);
+					if (transaction.contains(line)) {
+						this.category = files[i];
+					}
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
