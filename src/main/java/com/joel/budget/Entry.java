@@ -44,7 +44,11 @@ public class Entry {
 			e.printStackTrace();
 		}
 
-		System.out.format("%s, %s\n", this.date, transaction);
+		this.transaction = transaction;
+
+		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
+
+		System.out.format("%s, %s, %.2f\n", this.date, this.transaction, this.amount);
 
 	}
 }
