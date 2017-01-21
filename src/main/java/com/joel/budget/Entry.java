@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author joel
@@ -20,11 +22,29 @@ public class Entry {
 	private String category;
 	private float amount;
 
-	public Entry(String date, String transaction, String amount) throws ParseException {
+	public Entry(String date, String transaction, String amount) {
 
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-		this.date = format.parse(date);
-		System.out.format("%s, %s\n", date, transaction);
+		Pattern pat = Pattern.compile("Kortköp ([0-9]{6}) (.*)");
+		Matcher matcher = pat.matcher(transaction);
+		DateFormat format;
+		String dateStr;
+
+		if (matcher.matches()) {
+			format = new SimpleDateFormat("yyMMdd", Locale.ENGLISH);
+			dateStr = matcher.group(1);
+		} else {
+			format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+			dateStr = date;
+		}
+
+		try {
+			this.date = format.parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.format("%s, %s\n", this.date, transaction);
 
 	}
 }
