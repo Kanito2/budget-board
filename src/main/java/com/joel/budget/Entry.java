@@ -8,13 +8,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * @author joel
@@ -22,19 +22,24 @@ import java.util.regex.Pattern;
  */
 public class Entry {
 
-	private Date date;
+	private DateTime date;
 	private String transaction;
 	private String category;
 	private float amount;
 	private static float[] totalSums = new float[7];
-	private static Date startDate;
-	private static Date endDate;
+	private static DateTime start;
+	private static DateTime end;
 
 	public Entry(String date, String transaction, String amount) {
 		setDate(date, transaction);
 		this.transaction = transaction;
 		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
 		setCategory(transaction);
+	}
+
+	public static int daysBetween() {
+		int days = Days.daysBetween(start, end).getDays();
+		return days;
 	}
 
 	private void setCategory(String transaction) {
@@ -84,42 +89,39 @@ public class Entry {
 	private void setDate(String date, String transaction) {
 		Pattern pat = Pattern.compile("Kortköp ([0-9]{6}) (.*)");
 		Matcher matcher = pat.matcher(transaction);
-		DateFormat format;
+		DateTimeFormatter formatter;
 		String dateStr;
 
 		if (matcher.matches()) {
-			format = new SimpleDateFormat("yyMMdd", Locale.ENGLISH);
+			formatter = DateTimeFormat.forPattern("yyMMdd");
+			// format = new SimpleDateFormat("yyMMdd", Locale.ENGLISH);
 			dateStr = matcher.group(1);
 		} else {
-			format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+			formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+			// format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 			dateStr = date;
 		}
 
-		try {
-			this.date = format.parse(dateStr);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		this.date = formatter.parseDateTime(dateStr);
+
+		if (end == null) {
+			end = this.date;
+		}
+		if (start == null) {
+			start = this.date;
 		}
 
-		if (endDate == null) {
-			endDate = this.date;
+		if (this.date.isBefore(start)) {
+			start = this.date;
 		}
-		if (startDate == null) {
-			startDate = this.date;
-		}
-
-		if (this.date.before(startDate)) {
-			startDate = this.date;
-		}
-		if (this.date.after(endDate)) {
-			endDate = this.date;
+		if (this.date.isAfter(end)) {
+			end = this.date;
 		}
 	}
 
 	public void print() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.format("%s: %s, %s, %.0f\n", category, dateFormat.format(date), transaction, amount);
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+		System.out.format("%s: %s, %s, %.0f\n", category, formatter.print(date), transaction, amount);
 	}
 
 }

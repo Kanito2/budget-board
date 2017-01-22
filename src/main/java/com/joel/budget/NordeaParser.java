@@ -55,6 +55,7 @@ public class NordeaParser {
 		new NordeaParser(fileList);
 
 		Entry.printTotalSums();
+		System.out.println("days=" + Entry.daysBetween());
 
 	}
 
