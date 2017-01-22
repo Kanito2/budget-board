@@ -26,7 +26,9 @@ public class Entry {
 	private String transaction;
 	private String category;
 	private float amount;
-	public static float[] totalSums = new float[7];
+	private static float[] totalSums = new float[7];
+	private static Date startDate;
+	private static Date endDate;
 
 	public Entry(String date, String transaction, String amount) {
 		setDate(date, transaction);
@@ -98,6 +100,20 @@ public class Entry {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+		if (endDate == null) {
+			endDate = this.date;
+		}
+		if (startDate == null) {
+			startDate = this.date;
+		}
+
+		if (this.date.before(startDate)) {
+			startDate = this.date;
+		}
+		if (this.date.after(endDate)) {
+			endDate = this.date;
 		}
 	}
 
