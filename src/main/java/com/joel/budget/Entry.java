@@ -49,13 +49,12 @@ public class Entry {
 			File file = new File("/home/joel/workspace_bkp2/NordeaParser/categories/" + files[i] + ".txt");
 
 			if (file.exists() && !file.isDirectory()) {
-				// do something
+				// do nothing
 			} else {
 				try {
 					file.createNewFile();
 					System.out.println("File created: " + file.getAbsolutePath());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -70,10 +69,8 @@ public class Entry {
 					}
 				}
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -94,11 +91,9 @@ public class Entry {
 
 		if (matcher.matches()) {
 			formatter = DateTimeFormat.forPattern("yyMMdd");
-			// format = new SimpleDateFormat("yyMMdd", Locale.ENGLISH);
 			dateStr = matcher.group(1);
 		} else {
 			formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-			// format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 			dateStr = date;
 		}
 

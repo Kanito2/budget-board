@@ -13,20 +13,17 @@ public class NordeaParser {
 
 	public NordeaParser(List<File> fileList) {
 		for (File file : fileList) {
-			// System.out.println(file.getAbsolutePath());
 
 			CSVReader reader = null;
 			try {
 				reader = new CSVReader(new FileReader(file));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			List<String[]> myEntries = null;
 			try {
 				myEntries = reader.readAll();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -37,11 +34,11 @@ public class NordeaParser {
 				}
 			}
 		}
+		Entry.printTotalSums();
+		System.out.println("days=" + Entry.daysBetween());
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 		List<File> fileList = new ArrayList<File>();
 		// File file = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export
 		// (1).csv");
@@ -53,9 +50,6 @@ public class NordeaParser {
 		fileList.add(file2);
 
 		new NordeaParser(fileList);
-
-		Entry.printTotalSums();
-		System.out.println("days=" + Entry.daysBetween());
 
 	}
 

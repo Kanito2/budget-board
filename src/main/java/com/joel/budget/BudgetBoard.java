@@ -15,7 +15,9 @@ import java.awt.dnd.DropTargetListener;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * @author Joel
@@ -75,11 +77,6 @@ public class BudgetBoard {
 
 					List<File> fileList = (List<File>) e.getTransferable()
 							.getTransferData(DataFlavor.javaFileListFlavor);
-
-					// for (File file : fileList) {
-					// System.out.println("file dropped: " +
-					// file.getAbsolutePath());
-					// }
 
 					new NordeaParser(fileList);
 					int[] data = { (int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()),
