@@ -34,6 +34,13 @@ public class Entry {
 		setDate(date, transaction);
 		this.transaction = transaction;
 		this.amount = Float.parseFloat(amount.replace(".", "").replace(",", "."));
+		File dir = new File("categoryFiles");
+		dir.mkdir();
+		if (dir.exists() && dir.isDirectory()) {
+			// do nothing
+		} else {
+			dir.mkdir();
+		}
 		setCategory(transaction);
 	}
 
@@ -46,7 +53,7 @@ public class Entry {
 		String[] files = { "home", "food", "transport", "cloth", "saving", "other", "loan" };
 
 		for (int i = 0; i < files.length; i++) {
-			File file = new File("/home/joel/workspace_bkp2/NordeaParser/categories/" + files[i] + ".txt");
+			File file = new File("categoryFiles" + File.separator + files[i] + ".txt");
 
 			if (file.exists() && !file.isDirectory()) {
 				// do nothing

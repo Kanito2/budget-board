@@ -40,12 +40,14 @@ public class NordeaParser {
 
 	public static void main(String[] args) {
 		List<File> fileList = new ArrayList<File>();
-		// File file = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export
+		File file = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export (1).csv");
+		File file2 = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export (2).csv");
+		// File file = new
+		// File("/home/joel/workspace_bkp2/NordeaParser/exports/export
 		// (1).csv");
-		// File file2 = new File("C:\\Users\\Marcela\\Downloads\\Joel\\export
+		// File file2 = new
+		// File("/home/joel/workspace_bkp2/NordeaParser/exports/export
 		// (2).csv");
-		File file = new File("/home/joel/workspace_bkp2/NordeaParser/exports/export (1).csv");
-		File file2 = new File("/home/joel/workspace_bkp2/NordeaParser/exports/export (2).csv");
 		fileList.add(file);
 		fileList.add(file2);
 
