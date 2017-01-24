@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +27,7 @@ public class Entry {
 	private String transaction;
 	private String category;
 	private float amount;
-	private static float[] totalSums = new float[7];
+	private static int[] totalSums = new int[7];
 	private static DateTime start;
 	private static DateTime end;
 
@@ -47,6 +48,16 @@ public class Entry {
 	public static int daysBetween() {
 		int days = Days.daysBetween(start, end).getDays();
 		return days;
+	}
+
+	public static void monthlyExpense() {
+		int days = daysBetween();
+		int[] monthlyExpense = Arrays.stream(totalSums).map(i -> Math.abs(30 * i / days)).toArray();
+		monthlyExpense = Arrays.stream(monthlyExpense).map(i -> round(i, 500)).toArray();
+	}
+
+	private static int round(double i, int v) {
+		return (int) (Math.round(i / v) * v);
 	}
 
 	private void setCategory(String transaction) {
@@ -71,7 +82,7 @@ public class Entry {
 				while ((line = br.readLine()) != null) {
 					if (transaction.contains(line)) {
 						this.category = files[i];
-						totalSums[i] += amount;
+						totalSums[i] += Math.round(amount);
 						break;
 					}
 				}
@@ -85,7 +96,7 @@ public class Entry {
 
 	public static void printTotalSums() {
 		for (int i = 0; i < totalSums.length; i++) {
-			System.out.format("%.0f ", totalSums[i]);
+			System.out.format("%s ", totalSums[i]);
 		}
 		System.out.println();
 	}
