@@ -50,10 +50,19 @@ public class Entry {
 		return days;
 	}
 
-	public static void monthlyExpense() {
+	public static int[] monthlyExpense() {
 		int days = daysBetween();
 		int[] monthlyExpense = Arrays.stream(totalSums).map(i -> Math.abs(30 * i / days)).toArray();
 		monthlyExpense = Arrays.stream(monthlyExpense).map(i -> round(i, 500)).toArray();
+		printArray(monthlyExpense);
+		return monthlyExpense;
+	}
+	
+	public static void printArray(int[] array) {
+		for (int i = 0; i < array.length; i++) {
+			System.out.format("%s ", array[i]);
+		}
+		System.out.println();
 	}
 
 	private static int round(double i, int v) {
@@ -92,13 +101,6 @@ public class Entry {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public static void printTotalSums() {
-		for (int i = 0; i < totalSums.length; i++) {
-			System.out.format("%s ", totalSums[i]);
-		}
-		System.out.println();
 	}
 
 	private void setDate(String date, String transaction) {

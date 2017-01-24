@@ -31,7 +31,7 @@ public class BudgetBoard {
 	 */
 
 	private static JFrame frame;
-
+	
 	private static void createAndShowGUI(int[] data) {
 		// Create and set up the window.
 		frame = new JFrame("BudgetBoard");
@@ -79,8 +79,9 @@ public class BudgetBoard {
 							.getTransferData(DataFlavor.javaFileListFlavor);
 
 					new NordeaParser(fileList);
-					int[] data = { (int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()),
-							(int) (5 * Math.random()), (int) (5 * Math.random()), (int) (5 * Math.random()) };
+
+					int[] data = Entry.monthlyExpense();
+
 					frame.dispose();
 					createAndShowGUI(data);
 
@@ -96,7 +97,7 @@ public class BudgetBoard {
 		// creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				int[] data = { 6, 2, 1, 0, 4, 5 };
+				int[] data = { 0, 0, 0, 0, 0, 0 };
 				createAndShowGUI(data);
 			}
 		});

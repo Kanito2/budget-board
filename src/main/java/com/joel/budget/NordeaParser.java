@@ -34,7 +34,7 @@ public class NordeaParser {
 				}
 			}
 		}
-		Entry.printTotalSums();
+
 		System.out.println("days=" + Entry.daysBetween());
 		
 		Entry.monthlyExpense();
