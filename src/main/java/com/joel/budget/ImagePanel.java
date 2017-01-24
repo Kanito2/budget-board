@@ -22,6 +22,7 @@ public class ImagePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -2417945731616876267L;
 	private BufferedImage image;
+	private BufferedImage image2;
 	private int[] data;
 
 	public ImagePanel(int[] data) {
@@ -29,6 +30,8 @@ public class ImagePanel extends JPanel {
 		try {
 			image = ImageIO.read(new File(
 					"src" + File.separator + "main" + File.separator + "resources" + File.separator + "1000-f.jpg"));
+			image2 = ImageIO.read(new File(
+					"src" + File.separator + "main" + File.separator + "resources" + File.separator + "500-f.jpg"));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -40,9 +43,15 @@ public class ImagePanel extends JPanel {
 		int x = 0, y = 0;
 
 		for (int elem : data) {
+			int bills = elem / 1000;
+			int bills2 = (elem % 1000) / 500;
 			y = 0;
-			for (int i = 0; i < elem; i++) {
+			for (int i = 0; i < bills; i++) {
 				g.drawImage(image, x, y, 100, 50, this);
+				y += 50;
+			}
+			for (int i = 0; i < bills2; i++) {
+				g.drawImage(image2, x, y, 100, 50, this);
 				y += 50;
 			}
 			x += 100;
