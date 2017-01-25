@@ -38,23 +38,40 @@ public class BudgetBoard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 500);
 
-		JPanel jp = new JPanel(new GridLayout(0, 7));
-		JLabel label = new JLabel("Boende");
-		JLabel label2 = new JLabel("Mat");
-		JLabel label3 = new JLabel("Transport");
-		JLabel label4 = new JLabel("Kläder");
-		JLabel label5 = new JLabel("Sparande");
-		JLabel label6 = new JLabel("Övrigt");
-		JLabel label7 = new JLabel("Lån");
-		jp.add(label);
-		jp.add(label2);
-		jp.add(label3);
-		jp.add(label4);
-		jp.add(label5);
-		jp.add(label6);
-		jp.add(label7);
-		frame.getContentPane().add(jp, BorderLayout.NORTH);
+		addTitleLabels();
 
+		addImagePanels(data);
+
+		addMonthlyExpense();
+
+		enableDragAndDrop();
+
+		// Display the window.
+		// frame.pack();
+		frame.setVisible(true);
+	}
+
+	private static void addMonthlyExpense() {
+		int[] monthlyExpense = Entry.monthlyExpense(false);
+		JPanel jp3 = new JPanel(new GridLayout(0, 7));
+		JLabel label = new JLabel(monthlyExpense[0] + ":-");
+		JLabel label2 = new JLabel(monthlyExpense[1] + ":-");
+		JLabel label3 = new JLabel(monthlyExpense[2] + ":-");
+		JLabel label4 = new JLabel(monthlyExpense[3] + ":-");
+		JLabel label5 = new JLabel(monthlyExpense[4] + ":-");
+		JLabel label6 = new JLabel(monthlyExpense[5] + ":-");
+		JLabel label7 = new JLabel(monthlyExpense[6] + ":-");
+		jp3.add(label);
+		jp3.add(label2);
+		jp3.add(label3);
+		jp3.add(label4);
+		jp3.add(label5);
+		jp3.add(label6);
+		jp3.add(label7);
+		frame.getContentPane().add(jp3, BorderLayout.SOUTH);
+	}
+
+	private static void addImagePanels(int[] data) {
 		JPanel jp2 = new JPanel(new GridLayout(0, 7));
 		ImagePanel ip = new ImagePanel(data[0]);
 		ImagePanel ip2 = new ImagePanel(data[1]);
@@ -71,30 +88,25 @@ public class BudgetBoard {
 		jp2.add(ip6);
 		jp2.add(ip7);
 		frame.getContentPane().add(jp2, BorderLayout.CENTER);
+	}
 
-		int[] monthlyExpense = Entry.monthlyExpense(false);
-		JPanel jp3 = new JPanel(new GridLayout(0, 7));
-		JLabel alabel = new JLabel(monthlyExpense[0] + ":-");
-		JLabel alabel2 = new JLabel(monthlyExpense[1] + ":-");
-		JLabel alabel3 = new JLabel(monthlyExpense[2] + ":-");
-		JLabel alabel4 = new JLabel(monthlyExpense[3] + ":-");
-		JLabel alabel5 = new JLabel(monthlyExpense[4] + ":-");
-		JLabel alabel6 = new JLabel(monthlyExpense[5] + ":-");
-		JLabel alabel7 = new JLabel(monthlyExpense[6] + ":-");
-		jp3.add(alabel);
-		jp3.add(alabel2);
-		jp3.add(alabel3);
-		jp3.add(alabel4);
-		jp3.add(alabel5);
-		jp3.add(alabel6);
-		jp3.add(alabel7);
-		frame.getContentPane().add(jp3, BorderLayout.SOUTH);
-
-		enableDragAndDrop();
-
-		// Display the window.
-		// frame.pack();
-		frame.setVisible(true);
+	private static void addTitleLabels() {
+		JPanel jp = new JPanel(new GridLayout(0, 7));
+		JLabel label = new JLabel("Boende");
+		JLabel label2 = new JLabel("Mat");
+		JLabel label3 = new JLabel("Transport");
+		JLabel label4 = new JLabel("Kläder");
+		JLabel label5 = new JLabel("Sparande");
+		JLabel label6 = new JLabel("Övrigt");
+		JLabel label7 = new JLabel("Lån");
+		jp.add(label);
+		jp.add(label2);
+		jp.add(label3);
+		jp.add(label4);
+		jp.add(label5);
+		jp.add(label6);
+		jp.add(label7);
+		frame.getContentPane().add(jp, BorderLayout.NORTH);
 	}
 
 	private static void enableDragAndDrop() {

@@ -64,7 +64,7 @@ public class Entry {
 		if (round) {
 			monthlyExpense = Arrays.stream(monthlyExpense).map(i -> round(i, 500)).toArray();
 		}
-		printArray(monthlyExpense);
+		// printArray(monthlyExpense);
 		return monthlyExpense;
 	}
 
