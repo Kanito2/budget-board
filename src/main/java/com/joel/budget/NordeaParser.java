@@ -12,6 +12,9 @@ import com.opencsv.CSVReader;
 public class NordeaParser {
 
 	public NordeaParser(List<File> fileList) {
+		
+		Entry.clearData();
+		
 		for (File file : fileList) {
 
 			CSVReader reader = null;
@@ -36,8 +39,6 @@ public class NordeaParser {
 		}
 
 		System.out.println("days=" + Entry.daysBetween());
-		
-		Entry.monthlyExpense();
 	}
 
 	public static void main(String[] args) {

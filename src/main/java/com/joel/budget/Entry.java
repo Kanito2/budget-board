@@ -45,6 +45,14 @@ public class Entry {
 		setCategory(transaction);
 	}
 
+	public static void clearData() {
+		for (int i = 0; i < totalSums.length; i++) {
+			totalSums[i] = 0;
+		}
+		start = null;
+		end = null;
+	}
+
 	public static int daysBetween() {
 		int days = Days.daysBetween(start, end).getDays();
 		return days;
