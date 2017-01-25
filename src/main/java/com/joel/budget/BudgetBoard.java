@@ -72,6 +72,24 @@ public class BudgetBoard {
 		jp2.add(ip7);
 		frame.getContentPane().add(jp2, BorderLayout.CENTER);
 
+		int[] monthlyExpense = Entry.monthlyExpense(false);
+		JPanel jp3 = new JPanel(new GridLayout(0, 7));
+		JLabel alabel = new JLabel(monthlyExpense[0] + ":-");
+		JLabel alabel2 = new JLabel(monthlyExpense[1] + ":-");
+		JLabel alabel3 = new JLabel(monthlyExpense[2] + ":-");
+		JLabel alabel4 = new JLabel(monthlyExpense[3] + ":-");
+		JLabel alabel5 = new JLabel(monthlyExpense[4] + ":-");
+		JLabel alabel6 = new JLabel(monthlyExpense[5] + ":-");
+		JLabel alabel7 = new JLabel(monthlyExpense[6] + ":-");
+		jp3.add(alabel);
+		jp3.add(alabel2);
+		jp3.add(alabel3);
+		jp3.add(alabel4);
+		jp3.add(alabel5);
+		jp3.add(alabel6);
+		jp3.add(alabel7);
+		frame.getContentPane().add(jp3, BorderLayout.SOUTH);
+
 		enableDragAndDrop();
 
 		// Display the window.

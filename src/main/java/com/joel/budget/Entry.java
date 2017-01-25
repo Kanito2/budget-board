@@ -51,13 +51,23 @@ public class Entry {
 	}
 
 	public static int[] monthlyExpense() {
+		return monthlyExpense(true);
+	}
+
+	public static int[] monthlyExpense(boolean round) {
+		int[] monthlyExpense = { 0, 0, 0, 0, 0, 0, 0 };
+		if (start == null || end == null) {
+			return monthlyExpense;
+		}
 		int days = daysBetween();
-		int[] monthlyExpense = Arrays.stream(totalSums).map(i -> Math.abs(30 * i / days)).toArray();
-		monthlyExpense = Arrays.stream(monthlyExpense).map(i -> round(i, 500)).toArray();
+		monthlyExpense = Arrays.stream(totalSums).map(i -> Math.abs(30 * i / days)).toArray();
+		if (round) {
+			monthlyExpense = Arrays.stream(monthlyExpense).map(i -> round(i, 500)).toArray();
+		}
 		printArray(monthlyExpense);
 		return monthlyExpense;
 	}
-	
+
 	public static void printArray(int[] array) {
 		for (int i = 0; i < array.length; i++) {
 			System.out.format("%s ", array[i]);
