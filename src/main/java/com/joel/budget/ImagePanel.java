@@ -23,9 +23,9 @@ public class ImagePanel extends JPanel {
 	private static final long serialVersionUID = -2417945731616876267L;
 	private BufferedImage image;
 	private BufferedImage image2;
-	private int[] data;
+	private int data;
 
-	public ImagePanel(int[] data) {
+	public ImagePanel(int data) {
 		this.data = data;
 		try {
 			image = ImageIO.read(new File(
@@ -40,21 +40,18 @@ public class ImagePanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int x = 0, y = 0;
+		int y = 0;
 
-		for (int elem : data) {
-			int bills = elem / 1000;
-			int bills2 = (elem % 1000) / 500;
-			y = 0;
-			for (int i = 0; i < bills; i++) {
-				g.drawImage(image, x, y, 100, 50, this);
-				y += 50;
-			}
-			for (int i = 0; i < bills2; i++) {
-				g.drawImage(image2, x, y, 100, 50, this);
-				y += 50;
-			}
-			x += 100;
+		int bills = data / 1000;
+		int bills2 = (data % 1000) / 500;
+		y = 0;
+		for (int i = 0; i < bills; i++) {
+			g.drawImage(image, 0, y, 100, 50, this);
+			y += 50;
+		}
+		for (int i = 0; i < bills2; i++) {
+			g.drawImage(image2, 0, y, 100, 50, this);
+			y += 50;
 		}
 	}
 
