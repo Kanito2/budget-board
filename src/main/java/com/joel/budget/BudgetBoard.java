@@ -17,6 +17,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 /**
@@ -38,6 +41,8 @@ public class BudgetBoard {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 500);
 
+		createMenuBar();
+
 		addTitleLabels();
 
 		addImagePanels(data);
@@ -49,6 +54,22 @@ public class BudgetBoard {
 		// Display the window.
 		// frame.pack();
 		frame.setVisible(true);
+	}
+
+	private static void createMenuBar() {
+		JMenuBar menubar = new JMenuBar();
+		JMenu file = new JMenu("File");
+		JMenuItem eMenuItem = new JMenuItem("Exit");
+		eMenuItem.setToolTipText("Exit application");
+
+		eMenuItem.addActionListener(e -> {
+			System.exit(0);
+		});
+
+		file.add(eMenuItem);
+		menubar.add(file);
+		frame.setJMenuBar(menubar);
+
 	}
 
 	private static void addMonthlyExpense() {
